@@ -1,5 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.time.OffsetDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,17 +15,26 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="job_positions")
+@Table(name="activation_codes")
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobPosition {
+public class ActivationCode {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="name")
-	private String name;
+	@Column(name="user_id")
+	private int userId;
+	
+	@Column(name="activation_code")
+	private String activationCode;
+	
+	@Column(name="is_confirmed")
+	private boolean isConfirmed;
+	
+	@Column(name="confirmation_date")
+	private OffsetDateTime confirmationDate;
 	
 }
