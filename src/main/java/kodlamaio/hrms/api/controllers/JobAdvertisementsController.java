@@ -53,6 +53,6 @@ public class JobAdvertisementsController {
 	
 	@PostMapping("/update")
 	public Result update(@RequestBody JobAdvertisement jobAdvertisement) {
-		return this.jobAdvertisementService.add(jobAdvertisement);
+		return this.jobAdvertisementService.update(jobAdvertisement);
 	}
 }
