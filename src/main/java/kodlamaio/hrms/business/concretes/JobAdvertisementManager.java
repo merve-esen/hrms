@@ -27,7 +27,22 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 
 	@Override
 	public DataResult<List<JobAdvertisement>> getAll() {
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll());
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrue());
+	}
+	
+	@Override
+	public DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadline() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueOrderByApplicationDeadline());
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadlineDesc() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueOrderByApplicationDeadlineDesc());
+	}
+	
+	@Override
+	public DataResult<List<JobAdvertisement>> findByEmployer_Id(int employerId) {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByEmployer_Id(employerId));
 	}
 
 	@Override
@@ -41,6 +56,12 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		if(jobAdvertisement.getNumberOfOpenPositions() == 0)
 			return new ErrorResult("Açık pozisyon adedi alanı zorunludur.");
 		
+		this.jobAdvertisementDao.save(jobAdvertisement);
+		return new SuccessResult();
+	}
+	
+	@Override
+	public Result update(JobAdvertisement jobAdvertisement) {		
 		this.jobAdvertisementDao.save(jobAdvertisement);
 		return new SuccessResult();
 	}

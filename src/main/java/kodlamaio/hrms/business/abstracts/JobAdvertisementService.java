@@ -8,5 +8,9 @@ import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 
 public interface JobAdvertisementService {
 	DataResult<List<JobAdvertisement>> getAll();
+	DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadline();
+	DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadlineDesc();
+	DataResult<List<JobAdvertisement>> findByEmployer_Id(int employerId);
 	Result add(JobAdvertisement jobAdvertisement);
+	Result update(JobAdvertisement jobAdvertisement);
 }
