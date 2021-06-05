@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,24 +17,23 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="users")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name="language_skills")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-
+public class LanguageSkill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="email")
-	private String email;
+	@Column(name="language")
+	private String language;
 	
-	@Column(name="password")
-	private String password;
+	@Column(name="level")
+	private int level;
 	
-	@Column(name="is_active")
-	private boolean isActive;
-	
+	@JsonIgnore
+	@ManyToOne()
+	@JoinColumn(name="resume_id")
+	private Resume resume;
 }
