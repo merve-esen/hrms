@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,13 +29,17 @@ public class LanguageSkill {
 	@Column(name="id")
 	private int id;
 	
+	@NotBlank
+    @NotNull
 	@Column(name="language")
 	private String language;
 	
+	@NotBlank
+    @NotNull
 	@Column(name="level")
 	private int level;
 	
-	@JsonIgnore
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne()
 	@JoinColumn(name="resume_id")
 	private Resume resume;

@@ -5,14 +5,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,11 +22,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "resumes")
 @AllArgsConstructor
 @NoArgsConstructor
-//@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "educations", "languageSkills", "workExperiences", "programmingTechnologySkills" })
 public class Resume {
 	@Id
-	@Column(name = "candidate_id")
-	private int candidateId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 
 	@Column(name = "photo")
 	private String photo;
@@ -47,10 +46,9 @@ public class Resume {
 	@Column(name="update_date")
 	private LocalDate updateDate;
 	
-	@OneToOne
-    @MapsId
-    @JoinColumn(name = "candidate_id")
-    private Candidate candidate;
+	@OneToOne()
+	@JoinColumn(name = "candidate_id", referencedColumnName = "user_id")
+	private Candidate candidate;
 	
 	@OneToMany(mappedBy = "resume")
 	private List<Education> educations;
