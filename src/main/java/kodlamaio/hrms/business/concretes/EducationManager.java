@@ -35,4 +35,14 @@ public class EducationManager implements EducationService{
 		return new SuccessResult();
 	}
 
+	@Override
+	public DataResult<List<Education>> getAllByResumeIdOrderByEndYearDesc(int resumeId) {
+		return new SuccessDataResult<List<Education>>(this.educationDao.getAllByResumeIdOrderByEndYearDesc(resumeId));
+	}
+
+	@Override
+	public DataResult<List<Education>> getAllByResumeId(int resumeId) {
+		return new SuccessDataResult<List<Education>>(this.educationDao.getAllByResumeId(resumeId));
+	}
+
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.EducationService;
@@ -34,5 +35,15 @@ public class EducationsController {
 	@PostMapping("/add")
 	public Result add(@RequestBody Education education) {
 		return this.educationService.add(education);
+	}
+	
+	@GetMapping("/getAllByResumeIdOrderByEndYearDesc")
+	public DataResult<List<Education>> getAllByResumeIdOrderByEndYearDesc(@RequestParam int resumeId){
+		return this.educationService.getAllByResumeIdOrderByEndYearDesc(resumeId);
+	}
+	
+	@GetMapping("/getAllByResumeId")
+	public DataResult<List<Education>> getAllByResumeId(@RequestParam int resumeId){
+		return this.educationService.getAllByResumeId(resumeId);
 	}
 }

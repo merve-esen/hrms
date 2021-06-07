@@ -34,5 +34,15 @@ public class WorkExperienceManager implements WorkExperienceService{
 		this.workExperienceDao.save(workExperience);
 		return new SuccessResult();
 	}
+	
+	@Override
+	public DataResult<List<WorkExperience>> getAllByResumeIdOrderByEndYearDesc(int resumeId) {
+		return new SuccessDataResult<List<WorkExperience>>(this.workExperienceDao.getAllByResumeIdOrderByEndYearDesc(resumeId));
+	}
+
+	@Override
+	public DataResult<List<WorkExperience>> getAllByResumeId(int resumeId) {
+		return new SuccessDataResult<List<WorkExperience>>(this.workExperienceDao.getAllByResumeId(resumeId));
+	}
 
 }

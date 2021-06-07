@@ -9,4 +9,5 @@ import kodlamaio.hrms.entities.concretes.Resume;
 public interface ResumeService {
 	DataResult<List<Resume>> getAll();
 	Result add(Resume resume);
+	DataResult<List<Resume>> getAllByCandidateId(int candidateId);
 }
