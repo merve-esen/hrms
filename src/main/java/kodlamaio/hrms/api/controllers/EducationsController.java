@@ -48,4 +48,9 @@ public class EducationsController {
 	public DataResult<List<Education>> getAllByResumeId(@RequestParam int resumeId){
 		return this.educationService.getAllByResumeId(resumeId);
 	}
+	
+	@PostMapping("/delete")
+	public Result delete(@RequestBody Education education) {
+		return this.educationService.delete(education);
+	}
 }

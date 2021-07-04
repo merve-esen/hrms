@@ -34,5 +34,11 @@ public class ProgrammingTechnologySkillManager implements ProgrammingTechnologyS
 		this.programmingTechnologySkillDao.save(programmingTechnologySkill);
 		return new SuccessResult();
 	}
+	
+	@Override
+	public Result delete(ProgrammingTechnologySkill programmingTechnologySkill) {
+		this.programmingTechnologySkillDao.delete(programmingTechnologySkill);
+		return new SuccessResult();
+	}
 
 }

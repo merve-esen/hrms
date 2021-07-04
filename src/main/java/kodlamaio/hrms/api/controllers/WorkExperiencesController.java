@@ -48,4 +48,9 @@ public class WorkExperiencesController {
 	public DataResult<List<WorkExperience>> getAllByResumeId(@RequestParam int resumeId){
 		return this.workExperienceService.getAllByResumeId(resumeId);
 	}
+	
+	@PostMapping("/delete")
+	public Result delete(@RequestBody WorkExperience workExperience) {
+		return this.workExperienceService.delete(workExperience);
+	}
 }

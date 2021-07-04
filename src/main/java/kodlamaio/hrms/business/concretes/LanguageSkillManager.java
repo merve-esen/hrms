@@ -34,5 +34,11 @@ public class LanguageSkillManager implements LanguageSkillService{
 		this.languageSkillDao.save(languageSkill);
 		return new SuccessResult();
 	}
+	
+	@Override
+	public Result delete(LanguageSkill languageSkill) {
+		this.languageSkillDao.delete(languageSkill);
+		return new SuccessResult();
+	}
 
 }

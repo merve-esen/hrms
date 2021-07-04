@@ -37,4 +37,9 @@ public class ProgrammingTechnologySkillsController {
 	public Result add(@RequestBody ProgrammingTechnologySkill programmingTechnologySkill) {
 		return this.programmingTechnologySkillService.add(programmingTechnologySkill);
 	}
+	
+	@PostMapping("/delete")
+	public Result delete(@RequestBody ProgrammingTechnologySkill programmingTechnologySkill) {
+		return this.programmingTechnologySkillService.delete(programmingTechnologySkill);
+	}
 }

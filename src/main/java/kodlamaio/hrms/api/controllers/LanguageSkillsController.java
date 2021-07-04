@@ -37,4 +37,9 @@ public class LanguageSkillsController {
 	public Result add(@RequestBody LanguageSkill languageSkill) {
 		return this.languageSkillService.add(languageSkill);
 	}
+	
+	@PostMapping("/delete")
+	public Result delete(@RequestBody LanguageSkill languageSkill) {
+		return this.languageSkillService.delete(languageSkill);
+	}
 }

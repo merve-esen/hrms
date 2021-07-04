@@ -45,4 +45,10 @@ public class EducationManager implements EducationService{
 		return new SuccessDataResult<List<Education>>(this.educationDao.getAllByResumeId(resumeId));
 	}
 
+	@Override
+	public Result delete(Education education) {
+		this.educationDao.delete(education);
+		return new SuccessResult();
+	}
+
 }

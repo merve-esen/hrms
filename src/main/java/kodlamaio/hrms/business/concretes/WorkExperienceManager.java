@@ -36,6 +36,12 @@ public class WorkExperienceManager implements WorkExperienceService{
 	}
 	
 	@Override
+	public Result delete(WorkExperience workExperience) {
+		this.workExperienceDao.delete(workExperience);
+		return new SuccessResult();
+	}
+	
+	@Override
 	public DataResult<List<WorkExperience>> getAllByResumeIdOrderByEndYearDesc(int resumeId) {
 		return new SuccessDataResult<List<WorkExperience>>(this.workExperienceDao.getAllByResumeIdOrderByEndYearDesc(resumeId));
 	}
