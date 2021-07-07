@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService{
-	
+
 	private JobAdvertisementDao jobAdvertisementDao;
 
 	@Autowired
@@ -29,7 +30,7 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	public DataResult<List<JobAdvertisement>> getAll() {
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrue());
 	}
-	
+
 	@Override
 	public DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadline() {
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueOrderByApplicationDeadline());
@@ -39,7 +40,7 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	public DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadlineDesc() {
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueOrderByApplicationDeadlineDesc());
 	}
-	
+
 	@Override
 	public DataResult<List<JobAdvertisement>> findByEmployer_Id(int employerId) {
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByEmployer_Id(employerId));
@@ -55,13 +56,16 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 			return new ErrorResult("Şehir seçimi zorunludur.");
 		if(jobAdvertisement.getNumberOfOpenPositions() == 0)
 			return new ErrorResult("Açık pozisyon adedi alanı zorunludur.");
-		
+
+		jobAdvertisement.setActive(true);
+		jobAdvertisement.setCreateDate(LocalDate.now());
+
 		this.jobAdvertisementDao.save(jobAdvertisement);
 		return new SuccessResult();
 	}
-	
+
 	@Override
-	public Result update(JobAdvertisement jobAdvertisement) {		
+	public Result update(JobAdvertisement jobAdvertisement) {
 		this.jobAdvertisementDao.save(jobAdvertisement);
 		return new SuccessResult();
 	}
