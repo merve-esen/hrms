@@ -13,6 +13,7 @@ import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
+import kodlamaio.hrms.entities.concretes.Employee;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 
 @Service
@@ -28,22 +29,47 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 
 	@Override
 	public DataResult<List<JobAdvertisement>> getAll() {
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrue());
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll());
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadline() {
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueOrderByApplicationDeadline());
+	public DataResult<JobAdvertisement> getById(int id) {
+		return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.getById(id));
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadlineDesc() {
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActiveTrueOrderByApplicationDeadlineDesc());
+	public DataResult<List<JobAdvertisement>> getByIsActiveTrue() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByIsActiveTrue());
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> findByEmployer_Id(int employerId) {
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByEmployer_Id(employerId));
+	public DataResult<List<JobAdvertisement>> getByIsActiveTrueOrderByApplicationDeadline() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByIsActiveTrueOrderByApplicationDeadline());
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByIsActiveTrueOrderByApplicationDeadlineDesc() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByIsActiveTrueOrderByApplicationDeadlineDesc());
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByEmployer_Id(int employerId) {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByEmployer_Id(employerId));
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByEmployer_IdAndIsActiveTrue(int employerId) {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByEmployer_IdAndIsActiveTrue(employerId));
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByConfirmedTrue() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByConfirmedTrue());
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByEmployer_IdAndConfirmedTrue(int employerId) {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByEmployer_IdAndConfirmedTrue(employerId));
 	}
 
 	@Override
@@ -66,6 +92,38 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 
 	@Override
 	public Result update(JobAdvertisement jobAdvertisement) {
+		this.jobAdvertisementDao.save(jobAdvertisement);
+		return new SuccessResult();
+	}
+
+	@Override
+	public Result close(int jobAdvertisementId) {
+		JobAdvertisement jobAdvertisement=this.jobAdvertisementDao.getById(jobAdvertisementId);
+		jobAdvertisement.setActive(false);
+
+		this.jobAdvertisementDao.save(jobAdvertisement);
+		return new SuccessResult();
+	}
+
+	@Override
+	public Result publish(int jobAdvertisementId) {
+		JobAdvertisement jobAdvertisement=this.jobAdvertisementDao.getById(jobAdvertisementId);
+		jobAdvertisement.setActive(true);
+
+		this.jobAdvertisementDao.save(jobAdvertisement);
+		return new SuccessResult();
+	}
+
+	@Override
+	public Result confirm(int jobAdvertisementId, int employeeId) {
+		JobAdvertisement jobAdvertisement=this.jobAdvertisementDao.getById(jobAdvertisementId);
+		Employee employee = new Employee();
+		employee.setId(employeeId);
+
+		jobAdvertisement.setConfirmed(false);
+		jobAdvertisement.setConfirmDate(LocalDate.now());
+		jobAdvertisement.setEmployee(employee);
+
 		this.jobAdvertisementDao.save(jobAdvertisement);
 		return new SuccessResult();
 	}

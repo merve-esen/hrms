@@ -7,10 +7,18 @@ import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 
 public interface JobAdvertisementService {
+	DataResult<JobAdvertisement> getById(int id);
 	DataResult<List<JobAdvertisement>> getAll();
-	DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadline();
-	DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByApplicationDeadlineDesc();
-	DataResult<List<JobAdvertisement>> findByEmployer_Id(int employerId);
+	DataResult<List<JobAdvertisement>> getByIsActiveTrue();
+	DataResult<List<JobAdvertisement>> getByIsActiveTrueOrderByApplicationDeadline();
+	DataResult<List<JobAdvertisement>> getByIsActiveTrueOrderByApplicationDeadlineDesc();
+	DataResult<List<JobAdvertisement>> getByEmployer_Id(int employerId);
+	DataResult<List<JobAdvertisement>> getByEmployer_IdAndIsActiveTrue(int employerId);
+	DataResult<List<JobAdvertisement>> getByConfirmedTrue();
+	DataResult<List<JobAdvertisement>> getByEmployer_IdAndConfirmedTrue(int employerId);
 	Result add(JobAdvertisement jobAdvertisement);
 	Result update(JobAdvertisement jobAdvertisement);
+	Result publish(int jobAdvertisementId);
+	Result close(int jobAdvertisementId);
+	Result confirm(int jobAdvertisementId, int employeeId);
 }
