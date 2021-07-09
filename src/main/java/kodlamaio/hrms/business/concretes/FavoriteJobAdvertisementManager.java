@@ -27,6 +27,11 @@ public class FavoriteJobAdvertisementManager implements FavoriteJobAdvertisement
 	public DataResult<List<FavoriteJobAdvertisement>> getAll() {
 		return new SuccessDataResult<List<FavoriteJobAdvertisement>>(this.favoriteJobAdvertisementDao.findAll());
 	}
+	
+	@Override
+	public DataResult<List<FavoriteJobAdvertisement>> getByCandidate_Id(int candidateId) {
+		return new SuccessDataResult<List<FavoriteJobAdvertisement>>(this.favoriteJobAdvertisementDao.getByCandidate_Id(candidateId));
+	}
 
 	@Override
 	public Result add(FavoriteJobAdvertisement favoriteJobAdvertisement) {

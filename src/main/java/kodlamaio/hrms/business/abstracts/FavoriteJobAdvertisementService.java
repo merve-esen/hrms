@@ -8,6 +8,7 @@ import kodlamaio.hrms.entities.concretes.FavoriteJobAdvertisement;
 
 public interface FavoriteJobAdvertisementService {
 	DataResult<List<FavoriteJobAdvertisement>> getAll();
+	DataResult<List<FavoriteJobAdvertisement>> getByCandidate_Id(int candidateId);
 	Result add(FavoriteJobAdvertisement favoriteJobAdvertisement);
 	Result delete(FavoriteJobAdvertisement favoriteJobAdvertisement);
 }
