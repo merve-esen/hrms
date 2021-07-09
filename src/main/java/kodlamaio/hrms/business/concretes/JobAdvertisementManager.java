@@ -120,6 +120,20 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		Employee employee = new Employee();
 		employee.setId(employeeId);
 
+		jobAdvertisement.setConfirmed(true);
+		jobAdvertisement.setConfirmDate(LocalDate.now());
+		jobAdvertisement.setEmployee(employee);
+
+		this.jobAdvertisementDao.save(jobAdvertisement);
+		return new SuccessResult();
+	}
+
+	@Override
+	public Result reject(int jobAdvertisementId, int employeeId) {
+		JobAdvertisement jobAdvertisement=this.jobAdvertisementDao.getById(jobAdvertisementId);
+		Employee employee = new Employee();
+		employee.setId(employeeId);
+
 		jobAdvertisement.setConfirmed(false);
 		jobAdvertisement.setConfirmDate(LocalDate.now());
 		jobAdvertisement.setEmployee(employee);

@@ -97,4 +97,9 @@ public class JobAdvertisementsController {
 	public Result confirm(@RequestParam("jobAdvertisementId") int jobAdvertisementId, @RequestParam("employeeId") int employeeId) {
 		return this.jobAdvertisementService.confirm(jobAdvertisementId, employeeId);
 	}
+
+	@GetMapping("/reject")
+	public Result reject(@RequestParam("jobAdvertisementId") int jobAdvertisementId, @RequestParam("employeeId") int employeeId) {
+		return this.jobAdvertisementService.reject(jobAdvertisementId, employeeId);
+	}
 }

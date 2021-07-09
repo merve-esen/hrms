@@ -21,4 +21,5 @@ public interface JobAdvertisementService {
 	Result publish(int jobAdvertisementId);
 	Result close(int jobAdvertisementId);
 	Result confirm(int jobAdvertisementId, int employeeId);
+	Result reject(int jobAdvertisementId, int employeeId);
 }
