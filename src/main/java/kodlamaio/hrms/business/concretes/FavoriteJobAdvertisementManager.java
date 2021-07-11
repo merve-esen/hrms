@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.FavoriteJobAdvertisementService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -35,13 +36,25 @@ public class FavoriteJobAdvertisementManager implements FavoriteJobAdvertisement
 
 	@Override
 	public Result add(FavoriteJobAdvertisement favoriteJobAdvertisement) {
+		FavoriteJobAdvertisement favJobAdvertisement=this.favoriteJobAdvertisementDao.getByCandidate_IdAndJobAdvertisement_Id
+				(favoriteJobAdvertisement.getCandidate().getId(), favoriteJobAdvertisement.getJobAdvertisement().getId());
+		if(favJobAdvertisement != null)
+			return new ErrorResult("Bu ilan zaten favorilere eklenmiş");
+		
 		this.favoriteJobAdvertisementDao.save(favoriteJobAdvertisement);
 		return new SuccessResult();
 	}
 
 	@Override
 	public Result delete(FavoriteJobAdvertisement favoriteJobAdvertisement) {
-		this.favoriteJobAdvertisementDao.delete(favoriteJobAdvertisement);
-		return new SuccessResult();
+		FavoriteJobAdvertisement favJobAdvertisement=this.favoriteJobAdvertisementDao.getByCandidate_IdAndJobAdvertisement_Id
+				(favoriteJobAdvertisement.getCandidate().getId(), favoriteJobAdvertisement.getJobAdvertisement().getId());
+		if(favJobAdvertisement != null) {
+			this.favoriteJobAdvertisementDao.delete(favJobAdvertisement);
+			return new SuccessResult();
+		}
+		else {
+			return new ErrorResult("Bu ilan zaten favorilerden kaldırılmış");
+		}
 	}
 }

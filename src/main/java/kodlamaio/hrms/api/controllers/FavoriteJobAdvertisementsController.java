@@ -15,7 +15,6 @@ import kodlamaio.hrms.business.abstracts.FavoriteJobAdvertisementService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.FavoriteJobAdvertisement;
-import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 
 @RestController
 @CrossOrigin
