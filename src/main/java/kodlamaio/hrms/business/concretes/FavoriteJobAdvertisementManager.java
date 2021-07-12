@@ -28,7 +28,7 @@ public class FavoriteJobAdvertisementManager implements FavoriteJobAdvertisement
 	public DataResult<List<FavoriteJobAdvertisement>> getAll() {
 		return new SuccessDataResult<List<FavoriteJobAdvertisement>>(this.favoriteJobAdvertisementDao.findAll());
 	}
-	
+
 	@Override
 	public DataResult<List<FavoriteJobAdvertisement>> getByCandidate_Id(int candidateId) {
 		return new SuccessDataResult<List<FavoriteJobAdvertisement>>(this.favoriteJobAdvertisementDao.getByCandidate_Id(candidateId));
@@ -40,15 +40,14 @@ public class FavoriteJobAdvertisementManager implements FavoriteJobAdvertisement
 				(favoriteJobAdvertisement.getCandidate().getId(), favoriteJobAdvertisement.getJobAdvertisement().getId());
 		if(favJobAdvertisement != null)
 			return new ErrorResult("Bu ilan zaten favorilere eklenmiş");
-		
+
 		this.favoriteJobAdvertisementDao.save(favoriteJobAdvertisement);
 		return new SuccessResult();
 	}
 
 	@Override
-	public Result delete(FavoriteJobAdvertisement favoriteJobAdvertisement) {
-		FavoriteJobAdvertisement favJobAdvertisement=this.favoriteJobAdvertisementDao.getByCandidate_IdAndJobAdvertisement_Id
-				(favoriteJobAdvertisement.getCandidate().getId(), favoriteJobAdvertisement.getJobAdvertisement().getId());
+	public Result delete(int jobAdvertisementId, int candidateId) {
+		FavoriteJobAdvertisement favJobAdvertisement=this.favoriteJobAdvertisementDao.getByCandidate_IdAndJobAdvertisement_Id(candidateId, jobAdvertisementId);
 		if(favJobAdvertisement != null) {
 			this.favoriteJobAdvertisementDao.delete(favJobAdvertisement);
 			return new SuccessResult();

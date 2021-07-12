@@ -32,7 +32,7 @@ public class FavoriteJobAdvertisementsController {
 	public DataResult<List<FavoriteJobAdvertisement>> getAll(){
 		return this.favoriteJobAdvertisementService.getAll();
 	}
-	
+
 	@GetMapping("/getbycandidateid")
 	public DataResult<List<FavoriteJobAdvertisement>> getByCandidateId(@RequestParam("candidateId") int candidateId){
 		return this.favoriteJobAdvertisementService.getByCandidate_Id(candidateId);
@@ -43,8 +43,8 @@ public class FavoriteJobAdvertisementsController {
 		return this.favoriteJobAdvertisementService.add(favoriteJobAdvertisement);
 	}
 
-	@PostMapping("/delete")
-	public Result delete(@RequestBody FavoriteJobAdvertisement favoriteJobAdvertisement) {
-		return this.favoriteJobAdvertisementService.delete(favoriteJobAdvertisement);
+	@GetMapping("/delete")
+	public Result delete(@RequestParam("jobAdvertisementId") int jobAdvertisementId, @RequestParam("candidateId") int candidateId) {
+		return this.favoriteJobAdvertisementService.delete(jobAdvertisementId, candidateId);
 	}
 }

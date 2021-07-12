@@ -27,7 +27,7 @@ public class FavoriteJobAdvertisement {
 	@Column(name="id")
 	private int id;
 
-	@JsonProperty(access = Access.WRITE_ONLY)
+	//@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne()
 	@JoinColumn(name="job_advertisement_id")
 	private JobAdvertisement jobAdvertisement;
