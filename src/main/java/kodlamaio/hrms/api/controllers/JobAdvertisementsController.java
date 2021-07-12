@@ -15,6 +15,7 @@ import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementFilter;
 
 @RestController
 @CrossOrigin
@@ -72,6 +73,11 @@ public class JobAdvertisementsController {
 	public DataResult<List<JobAdvertisement>> getByEmployer_IdAndConfirmedTrue(@RequestParam("employerId") int employerId){
 		return this.jobAdvertisementService.getByEmployer_IdAndConfirmedTrue(employerId);
 	}
+
+	@PostMapping("/getByActiveAndFilter")
+    public Result getByActiveAndFilter(@RequestParam int pageNo, @RequestParam int pageSize, @RequestBody JobAdvertisementFilter jobAdvertisementFilter){
+        return this.jobAdvertisementService.getByIsActiveAndPageNumberAndFilter(pageNo, pageSize, jobAdvertisementFilter);
+    }
 
 	@PostMapping("/add")
 	public Result add(@RequestBody JobAdvertisement jobAdvertisement) {

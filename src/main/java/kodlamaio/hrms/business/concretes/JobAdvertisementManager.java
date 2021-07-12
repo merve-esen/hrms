@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
@@ -15,6 +17,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.Employee;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementFilter;
 
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService{
@@ -71,6 +74,13 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	public DataResult<List<JobAdvertisement>> getByEmployer_IdAndConfirmedTrue(int employerId) {
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByEmployer_IdAndConfirmedTrue(employerId));
 	}
+
+	@Override
+    public DataResult<List<JobAdvertisement>> getByIsActiveAndPageNumberAndFilter(int pageNo, int pageSize, JobAdvertisementFilter jobAdvertisementFilter) {
+        Pageable pageable = PageRequest.of(pageNo -1, pageSize);
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByFilter(jobAdvertisementFilter, pageable).getContent(),
+        		this.jobAdvertisementDao.getByFilter(jobAdvertisementFilter,pageable).getTotalElements()+"");
+    }
 
 	@Override
 	public Result add(JobAdvertisement jobAdvertisement) {
