@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EducationService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -15,7 +16,7 @@ import kodlamaio.hrms.entities.concretes.Education;
 
 @Service
 public class EducationManager implements EducationService{
-	
+
 	private EducationDao educationDao;
 
 	@Autowired
@@ -30,12 +31,6 @@ public class EducationManager implements EducationService{
 	}
 
 	@Override
-	public Result add(Education education) {
-		this.educationDao.save(education);
-		return new SuccessResult();
-	}
-
-	@Override
 	public DataResult<List<Education>> getAllByResumeIdOrderByEndYearDesc(int resumeId) {
 		return new SuccessDataResult<List<Education>>(this.educationDao.getAllByResumeIdOrderByEndYearDesc(resumeId));
 	}
@@ -46,9 +41,18 @@ public class EducationManager implements EducationService{
 	}
 
 	@Override
-	public Result delete(Education education) {
-		this.educationDao.delete(education);
+	public Result add(Education education) {
+		this.educationDao.save(education);
 		return new SuccessResult();
+	}
+
+	@Override
+	public Result delete(int educationId) {
+		if(!this.educationDao.existsById(educationId)){
+            return new ErrorResult("Silinecek kayıt bulunamadı");
+        }
+        this.educationDao.deleteById(educationId);
+        return new SuccessResult("Silindi");
 	}
 
 }

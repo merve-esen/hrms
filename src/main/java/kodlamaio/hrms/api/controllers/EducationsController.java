@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,29 +29,29 @@ public class EducationsController {
 		super();
 		this.educationService = educationService;
 	}
-	
+
 	@GetMapping("/getall")
 	public DataResult<List<Education>> getAll(){
 		return this.educationService.getAll();
 	}
-	
+
 	@PostMapping("/add")
 	public Result add(@RequestBody Education education) {
 		return this.educationService.add(education);
 	}
-	
+
 	@GetMapping("/getAllByResumeIdOrderByEndYearDesc")
 	public DataResult<List<Education>> getAllByResumeIdOrderByEndYearDesc(@RequestParam int resumeId){
 		return this.educationService.getAllByResumeIdOrderByEndYearDesc(resumeId);
 	}
-	
+
 	@GetMapping("/getAllByResumeId")
 	public DataResult<List<Education>> getAllByResumeId(@RequestParam int resumeId){
 		return this.educationService.getAllByResumeId(resumeId);
 	}
-	
-	@PostMapping("/delete")
-	public Result delete(@RequestBody Education education) {
-		return this.educationService.delete(education);
+
+	@DeleteMapping("/delete")
+	public Result delete(@RequestParam int educationId) {
+		return this.educationService.delete(educationId);
 	}
 }

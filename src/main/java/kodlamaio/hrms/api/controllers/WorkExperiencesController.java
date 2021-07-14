@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,29 +29,29 @@ public class WorkExperiencesController {
 		super();
 		this.workExperienceService = workExperienceService;
 	}
-	
+
 	@GetMapping("/getall")
 	public DataResult<List<WorkExperience>> getAll(){
 		return this.workExperienceService.getAll();
 	}
-	
+
 	@PostMapping("/add")
 	public Result add(@RequestBody WorkExperience workExperience) {
 		return this.workExperienceService.add(workExperience);
 	}
-	
+
 	@GetMapping("/getAllByResumeIdOrderByEndYearDesc")
 	public DataResult<List<WorkExperience>> getAllByResumeIdOrderByEndYearDesc(@RequestParam int resumeId){
 		return this.workExperienceService.getAllByResumeIdOrderByEndYearDesc(resumeId);
 	}
-	
+
 	@GetMapping("/getAllByResumeId")
 	public DataResult<List<WorkExperience>> getAllByResumeId(@RequestParam int resumeId){
 		return this.workExperienceService.getAllByResumeId(resumeId);
 	}
-	
-	@PostMapping("/delete")
-	public Result delete(@RequestBody WorkExperience workExperience) {
-		return this.workExperienceService.delete(workExperience);
+
+	@DeleteMapping("/delete")
+	public Result delete(@RequestParam int workExperienceId) {
+		return this.workExperienceService.delete(workExperienceId);
 	}
 }

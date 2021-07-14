@@ -8,6 +8,7 @@ import kodlamaio.hrms.entities.concretes.LanguageSkill;
 
 public interface LanguageSkillService {
 	DataResult<List<LanguageSkill>> getAll();
-	Result add(LanguageSkill languageSkill);
-	Result delete(LanguageSkill languageSkill);
+	DataResult<List<LanguageSkill>> getAllByResumeId(int resumeId);
+	Result add(LanguageSkill education);
+	Result delete(int languageSkillId);
 }

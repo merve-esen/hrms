@@ -8,6 +8,7 @@ import kodlamaio.hrms.entities.concretes.ProgrammingTechnologySkill;
 
 public interface ProgrammingTechnologySkillService {
 	DataResult<List<ProgrammingTechnologySkill>> getAll();
+	DataResult<List<ProgrammingTechnologySkill>> getAllByResumeId(int resumeId);
 	Result add(ProgrammingTechnologySkill programmingTechnologySkill);
-	Result delete(ProgrammingTechnologySkill programmingTechnologySkill);
+	Result delete(int programmingTechnologySkillId);
 }

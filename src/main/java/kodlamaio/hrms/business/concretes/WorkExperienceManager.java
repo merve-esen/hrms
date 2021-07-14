@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.WorkExperienceService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -15,7 +16,7 @@ import kodlamaio.hrms.entities.concretes.WorkExperience;
 
 @Service
 public class WorkExperienceManager implements WorkExperienceService{
-	
+
 	private WorkExperienceDao workExperienceDao;
 
 	@Autowired
@@ -34,13 +35,16 @@ public class WorkExperienceManager implements WorkExperienceService{
 		this.workExperienceDao.save(workExperience);
 		return new SuccessResult();
 	}
-	
+
 	@Override
-	public Result delete(WorkExperience workExperience) {
-		this.workExperienceDao.delete(workExperience);
-		return new SuccessResult();
-	}
-	
+    public Result delete(int workExperienceId) {
+        if(!this.workExperienceDao.existsById(workExperienceId)){
+            return new ErrorResult("Böyle bir tecrübe yok");
+        }
+        this.workExperienceDao.deleteById(workExperienceId);
+        return new SuccessResult("Silindi");
+    }
+
 	@Override
 	public DataResult<List<WorkExperience>> getAllByResumeIdOrderByEndYearDesc(int resumeId) {
 		return new SuccessDataResult<List<WorkExperience>>(this.workExperienceDao.getAllByResumeIdOrderByEndYearDesc(resumeId));

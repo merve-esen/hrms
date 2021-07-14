@@ -28,25 +28,25 @@ public class Education {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	
+
 	@NotBlank
     @NotNull
 	@Column(name="school_name")
 	private String schoolName;
-	
+
 	@NotBlank
     @NotNull
 	@Column(name="department_name")
 	private String departmentName;
-	
+
 	@NotBlank
     @NotNull
 	@Column(name="start_year")
-	private int startYear;
-	
+	private Integer startYear;
+
 	@Column(name="end_year")
-	private int endYear;
-	
+	private Integer endYear;
+
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne()
 	@JoinColumn(name="resume_id")
