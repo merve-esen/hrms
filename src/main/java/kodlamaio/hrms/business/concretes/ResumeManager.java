@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,14 @@ public class ResumeManager implements ResumeService{
 
 	@Override
 	public Result add(Resume resume) {
+		resume.setCreateDate(LocalDate.now());
 		this.resumeDao.save(resume);
 		return new SuccessResult();
 	}
 
 	@Override
 	public Result update(Resume resume) {
+		resume.setUpdateDate(LocalDate.now());
 		this.resumeDao.save(resume);
 		return new SuccessResult();
 	}
@@ -56,7 +59,7 @@ public class ResumeManager implements ResumeService{
     public Result updateGithubLink(int resumeId, String githubLink) {
 
         if(!this.resumeDao.existsById(resumeId)){
-            return new ErrorResult("Böyle bir önzgeçmiş yok");
+            return new ErrorResult("Özgeçmiş kaydı bulunamadı");
         }else if(!githubLink.startsWith("https://github.com")){
             if(!githubLink.startsWith("github.com")){
                 return new ErrorResult("Geçerli bir github linki değil");
@@ -65,6 +68,7 @@ public class ResumeManager implements ResumeService{
 
         Resume resume=this.resumeDao.getById(resumeId);
         resume.setGithubLink(githubLink);
+        resume.setUpdateDate(LocalDate.now());
         this.resumeDao.save(resume);
         return new SuccessResult("Kaydedildi");
     }
@@ -72,10 +76,11 @@ public class ResumeManager implements ResumeService{
     @Override
     public Result deleteGithubLink(int resumeId) {
         if(!this.resumeDao.existsById(resumeId)){
-            return new ErrorResult("Böyle bir cv yok");
+            return new ErrorResult("Özgeçmiş kaydı bulunamadı");
         }
         Resume resume=this.resumeDao.getById(resumeId);
         resume.setGithubLink(null);
+        resume.setUpdateDate(LocalDate.now());
         this.resumeDao.save(resume);
 
         return new SuccessResult("Github adresi kaldırıldı");
@@ -84,15 +89,16 @@ public class ResumeManager implements ResumeService{
     @Override
     public Result updateLinkedinLink(int resumeId, String linkedinLink) {
         if(!this.resumeDao.existsById(resumeId)){
-            return new ErrorResult("Böyle bir özgeçmiş yok");
+            return new ErrorResult("Özgeçmiş kaydı bulunamadı");
         } else if(!linkedinLink.startsWith("https://www.linkedin.com") &&
                 !linkedinLink.startsWith("www.linkedin.com") &&
                 !linkedinLink.startsWith("https://linkedin.com") &&
                 !linkedinLink.startsWith("linkedin.com")){
-            return new ErrorResult("Geçerli bir linked in adresi değil");
+            return new ErrorResult("Geçerli bir linkedin adresi değil");
         }
         Resume resume=this.resumeDao.getById(resumeId);
         resume.setLinkedinLink(linkedinLink);
+        resume.setUpdateDate(LocalDate.now());
         this.resumeDao.save(resume);
         return new SuccessResult("Kaydedildi");
     }
@@ -100,10 +106,11 @@ public class ResumeManager implements ResumeService{
     @Override
     public Result deleteLinkedinLink(int resumeId) {
         if(!this.resumeDao.existsById(resumeId)){
-            return new ErrorResult("Böyle bir özgeçmiş yok");
+            return new ErrorResult("Özgeçmiş kaydı bulunamadı");
         }
         Resume resume=this.resumeDao.getById(resumeId);
         resume.setLinkedinLink(null);
+        resume.setUpdateDate(LocalDate.now());
         this.resumeDao.save(resume);
         return new SuccessResult("Linkedin adresi silindi");
     }
@@ -111,12 +118,13 @@ public class ResumeManager implements ResumeService{
     @Override
     public Result updateObjective(int resumeId, String objective) {
         if(!this.resumeDao.existsById(resumeId)){
-            return new ErrorResult("Böyle bir özgeçmiş yok");
+            return new ErrorResult("Özgeçmiş kaydı bulunamadı");
         } else if(objective.length()<=2){
             return new ErrorResult("Ön yazı 2 krakterden uzun olmalıdır");
         }
         Resume resume=this.resumeDao.getById(resumeId);
         resume.setObjective(objective);
+        resume.setUpdateDate(LocalDate.now());
         this.resumeDao.save(resume);
         return new SuccessResult("Ön yazı kaydedildi");
     }
