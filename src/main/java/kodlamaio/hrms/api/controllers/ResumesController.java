@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import kodlamaio.hrms.business.abstracts.ResumeService;
+import kodlamaio.hrms.core.services.CloudinaryService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Resume;
@@ -25,11 +27,13 @@ import kodlamaio.hrms.entities.concretes.Resume;
 public class ResumesController {
 
 	private ResumeService resumeService;
+	private CloudinaryService cloudinaryService;
 
 	@Autowired
-	public ResumesController(ResumeService resumeService) {
+	public ResumesController(ResumeService resumeService, CloudinaryService cloudinaryService) {
 		super();
 		this.resumeService = resumeService;
+		this.cloudinaryService = cloudinaryService;
 	}
 
 	@GetMapping("/getall")
@@ -95,6 +99,15 @@ public class ResumesController {
             return ResponseEntity.ok(result);
         }
         return ResponseEntity.badRequest().body(result);
+    }
+
+    @PostMapping("/updatePhoto")
+    public ResponseEntity<?> updatePhoto(@RequestParam MultipartFile multipartFile, @RequestParam int resumeId){
+        Result result=this.resumeService.updatePhoto(multipartFile, resumeId);
+        if(!result.isSuccess()){
+            return ResponseEntity.badRequest().body(result);
+        }
+        return ResponseEntity.ok(result);
     }
 
 }
