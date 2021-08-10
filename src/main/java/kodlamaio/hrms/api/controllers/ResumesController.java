@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import kodlamaio.hrms.business.abstracts.ResumeService;
-import kodlamaio.hrms.core.services.CloudinaryService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Resume;
@@ -27,13 +26,11 @@ import kodlamaio.hrms.entities.concretes.Resume;
 public class ResumesController {
 
 	private ResumeService resumeService;
-	private CloudinaryService cloudinaryService;
 
 	@Autowired
-	public ResumesController(ResumeService resumeService, CloudinaryService cloudinaryService) {
+	public ResumesController(ResumeService resumeService) {
 		super();
 		this.resumeService = resumeService;
-		this.cloudinaryService = cloudinaryService;
 	}
 
 	@GetMapping("/getall")
