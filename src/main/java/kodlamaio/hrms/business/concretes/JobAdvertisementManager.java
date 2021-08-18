@@ -109,6 +109,9 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	@Override
 	public Result close(int jobAdvertisementId) {
 		JobAdvertisement jobAdvertisement=this.jobAdvertisementDao.getById(jobAdvertisementId);
+		if (jobAdvertisement == null)
+			return new ErrorResult("Kayıt bulunamadı");
+
 		jobAdvertisement.setActive(false);
 
 		this.jobAdvertisementDao.save(jobAdvertisement);
@@ -118,6 +121,9 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	@Override
 	public Result publish(int jobAdvertisementId) {
 		JobAdvertisement jobAdvertisement=this.jobAdvertisementDao.getById(jobAdvertisementId);
+		if (jobAdvertisement == null)
+			return new ErrorResult("Kayıt bulunamadı");
+
 		jobAdvertisement.setActive(true);
 
 		this.jobAdvertisementDao.save(jobAdvertisement);
@@ -127,6 +133,9 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	@Override
 	public Result confirm(int jobAdvertisementId, int employeeId) {
 		JobAdvertisement jobAdvertisement=this.jobAdvertisementDao.getById(jobAdvertisementId);
+		if (jobAdvertisement == null)
+			return new ErrorResult("Kayıt bulunamadı");
+
 		Employee employee = new Employee();
 		employee.setId(employeeId);
 
@@ -141,6 +150,9 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	@Override
 	public Result reject(int jobAdvertisementId, int employeeId) {
 		JobAdvertisement jobAdvertisement=this.jobAdvertisementDao.getById(jobAdvertisementId);
+		if (jobAdvertisement == null)
+			return new ErrorResult("Kayıt bulunamadı");
+
 		Employee employee = new Employee();
 		employee.setId(employeeId);
 

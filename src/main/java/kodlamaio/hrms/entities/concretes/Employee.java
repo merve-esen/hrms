@@ -29,4 +29,7 @@ public class Employee extends User{
 
 	@OneToMany(mappedBy = "employee")
 	private List<JobAdvertisement> jobAdvertisements;
+
+	@OneToMany(mappedBy = "employee")
+	private List<EmployerUpdate> employerUpdates;
 }

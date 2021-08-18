@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -27,13 +28,17 @@ public class Employer extends User{
 
 	@Column(name="company_name")
 	private String companyName;
-	
+
 	@Column(name="web_site")
 	private String webSite;
-	
+
 	@Column(name="phone_number")
 	private String phoneNumber;
-	
+
 	@OneToMany(mappedBy = "employer")
 	private List<JobAdvertisement> jobAdvertisements;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "employer")
+	private List<EmployerUpdate> employerUpdates;
 }

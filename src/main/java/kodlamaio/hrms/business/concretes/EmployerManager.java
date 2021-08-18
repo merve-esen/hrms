@@ -18,7 +18,7 @@ import kodlamaio.hrms.entities.concretes.Employer;
 
 @Service
 public class EmployerManager implements EmployerService{
-	
+
 	private EmployerDao employerDao;
 
 	@Autowired
@@ -33,16 +33,21 @@ public class EmployerManager implements EmployerService{
 	}
 
 	@Override
+	public DataResult<Employer> getById(int id) {
+		return new SuccessDataResult<Employer>(this.employerDao.getById(id));
+	}
+
+	@Override
 	public Result add(Employer employer) {
-		
-		if(employer.getCompanyName() == null || employer.getWebSite() == null || employer.getPhoneNumber() == null || 
+
+		if(employer.getCompanyName() == null || employer.getWebSite() == null || employer.getPhoneNumber() == null ||
 				employer.getEmail() == null || employer.getPassword() == null)
 			return new ErrorResult("Tüm alanlar zorunludur.");
-		
+
 		if(!isRealEmployer(employer)) {
 			return new ErrorResult("Geçersiz Email Adresi");
 		}
-		
+
 		this.employerDao.save(employer);
 		return new SuccessResult();
 	}
@@ -55,9 +60,9 @@ public class EmployerManager implements EmployerService{
 	    	 return false;
 	     }
 	     else if(!employer.getEmail().contains(employer.getWebSite())) {
-	    	return false; 
+	    	return false;
 	     }
 	     return true;
-	     
+
 	}
 }
