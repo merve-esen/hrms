@@ -8,6 +8,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,6 +32,7 @@ public class Employee extends User{
 	@OneToMany(mappedBy = "employee")
 	private List<JobAdvertisement> jobAdvertisements;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "employee")
 	private List<EmployerUpdate> employerUpdates;
 }
