@@ -42,8 +42,8 @@ public class EmployerUpdateManager implements EmployerUpdateService{
 	}
 
 	@Override
-	public DataResult<List<EmployerUpdate>> getByDeletedFalseAndConfirmedFalse() {
-		return new SuccessDataResult<List<EmployerUpdate>>(this.employerUpdateDao.getByDeletedFalseAndConfirmedFalse());
+	public DataResult<List<EmployerUpdate>> getByDeletedFalse() {
+		return new SuccessDataResult<List<EmployerUpdate>>(this.employerUpdateDao.getByDeletedFalse());
 	}
 
 	@Override

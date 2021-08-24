@@ -10,7 +10,7 @@ public interface EmployerUpdateService {
 	DataResult<List<EmployerUpdate>> getAll();
 	DataResult<EmployerUpdate> getById(int id);
 	DataResult<List<EmployerUpdate>> getByEmployer_Id(int employerId);
-	DataResult<List<EmployerUpdate>> getByDeletedFalseAndConfirmedFalse();
+	DataResult<List<EmployerUpdate>> getByDeletedFalse();
 	DataResult<List<EmployerUpdate>> getByEmployer_IdAndDeletedFalse(int employerId);
 	Result add(EmployerUpdate employerUpdate);
 	Result update(EmployerUpdate employerUpdate);

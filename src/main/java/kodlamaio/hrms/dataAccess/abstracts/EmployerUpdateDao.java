@@ -8,7 +8,7 @@ import kodlamaio.hrms.entities.concretes.EmployerUpdate;
 
 public interface EmployerUpdateDao extends JpaRepository<EmployerUpdate, Integer>{
 	EmployerUpdate getById(int id);
-	List<EmployerUpdate> getByDeletedFalseAndConfirmedFalse();
+	List<EmployerUpdate> getByDeletedFalse();
 	List<EmployerUpdate> getByEmployer_Id(int employerId);
 	List<EmployerUpdate> getByEmployer_IdAndDeletedFalse(int employerId);
 }

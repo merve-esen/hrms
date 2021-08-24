@@ -46,7 +46,7 @@ public class EmployerUpdate {
 	private boolean deleted;
 
 	@Column(name="confirmed")
-	private boolean confirmed;
+	private Boolean confirmed;
 
 	@Column(name="confirm_date")
 	private LocalDate confirmDate;

@@ -38,9 +38,9 @@ public class EmployerUpdatesController {
 		return this.employerUpdateService.getById(id);
 	}
 
-	@GetMapping("/getbydeletedfalseandconfirmedfalse")
-	public DataResult<List<EmployerUpdate>> getByDeletedFalseAndConfirmedFalse(){
-		return this.employerUpdateService.getByDeletedFalseAndConfirmedFalse();
+	@GetMapping("/getbydeletedfalse")
+	public DataResult<List<EmployerUpdate>> getByDeletedFalse(){
+		return this.employerUpdateService.getByDeletedFalse();
 	}
 
 	@GetMapping("/getbyemployerid")
