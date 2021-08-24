@@ -1,9 +1,12 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -34,6 +37,17 @@ public class Employer extends User{
 
 	@Column(name="phone_number")
 	private String phoneNumber;
+
+	@Column(name="confirmed")
+	private boolean confirmed;
+
+	@Column(name="confirm_date")
+	private LocalDate confirmDate;
+
+	@JsonIgnore
+	@ManyToOne()
+	@JoinColumn(name="confirming_employee_id")
+	private Employee employee;
 
 	@OneToMany(mappedBy = "employer")
 	private List<JobAdvertisement> jobAdvertisements;

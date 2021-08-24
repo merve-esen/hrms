@@ -9,5 +9,9 @@ import kodlamaio.hrms.entities.concretes.Employer;
 public interface EmployerService {
 	DataResult<List<Employer>> getAll();
 	DataResult<Employer> getById(int id);
-	Result add(Employer candidate);
+	DataResult<List<Employer>> getByConfirmedTrue();
+	DataResult<List<Employer>> getByConfirmedFalse();
+	Result add(Employer employer);
+	Result confirm(int employerId, int employeeId);
+	Result reject(int employerId, int employeeId);
 }
