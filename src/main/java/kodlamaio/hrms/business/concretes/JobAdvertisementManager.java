@@ -66,6 +66,11 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
+	public DataResult<List<JobAdvertisement>> getByConfirmedIsNull() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByConfirmedIsNull());
+	}
+
+	@Override
 	public DataResult<List<JobAdvertisement>> getByConfirmedTrue() {
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByConfirmedTrue());
 	}

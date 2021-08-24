@@ -73,7 +73,7 @@ public class JobAdvertisement {
 	private Workplace workplace;
 
 	@Column(name="confirmed")
-	private boolean confirmed;
+	private Boolean confirmed;
 
 	@Column(name="confirm_date")
 	private LocalDate confirmDate;

@@ -64,6 +64,11 @@ public class JobAdvertisementsController {
 		return this.jobAdvertisementService.getByEmployer_IdAndIsActiveTrue(employerId);
 	}
 
+	@GetMapping("/getbyconfirmedisnull")
+	public DataResult<List<JobAdvertisement>> getByConfirmedIsNull(){
+		return this.jobAdvertisementService.getByConfirmedIsNull();
+	}
+
 	@GetMapping("/getbyconfirmedtrue")
 	public DataResult<List<JobAdvertisement>> getByConfirmedTrue(){
 		return this.jobAdvertisementService.getByConfirmedTrue();
