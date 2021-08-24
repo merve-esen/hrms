@@ -11,4 +11,5 @@ public interface EmployerDao extends JpaRepository<Employer, Integer>{
 	Boolean existsByEmail(String email);
 	List<Employer> getByConfirmedTrue();
 	List<Employer> getByConfirmedFalse();
+	List<Employer> getByConfirmedIsNull();
 }

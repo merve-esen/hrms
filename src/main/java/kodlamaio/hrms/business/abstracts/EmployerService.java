@@ -11,6 +11,7 @@ public interface EmployerService {
 	DataResult<Employer> getById(int id);
 	DataResult<List<Employer>> getByConfirmedTrue();
 	DataResult<List<Employer>> getByConfirmedFalse();
+	DataResult<List<Employer>> getByConfirmedIsNull();
 	Result add(Employer employer);
 	Result confirm(int employerId, int employeeId);
 	Result reject(int employerId, int employeeId);

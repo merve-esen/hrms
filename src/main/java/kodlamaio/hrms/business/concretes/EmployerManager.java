@@ -50,6 +50,11 @@ public class EmployerManager implements EmployerService{
 	}
 
 	@Override
+	public DataResult<List<Employer>> getByConfirmedIsNull() {
+		return new SuccessDataResult<List<Employer>>(this.employerDao.getByConfirmedIsNull());
+	}
+
+	@Override
 	public Result add(Employer employer) {
 
 		if(employer.getCompanyName() == null || employer.getWebSite() == null || employer.getPhoneNumber() == null ||

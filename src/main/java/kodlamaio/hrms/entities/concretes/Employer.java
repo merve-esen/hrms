@@ -39,7 +39,7 @@ public class Employer extends User{
 	private String phoneNumber;
 
 	@Column(name="confirmed")
-	private boolean confirmed;
+	private Boolean confirmed;
 
 	@Column(name="confirm_date")
 	private LocalDate confirmDate;

@@ -49,6 +49,11 @@ public class EmployersController {
 		return this.employerService.getByConfirmedFalse();
 	}
 
+	@GetMapping("/getbyconfirmedisnull")
+	public DataResult<List<Employer>> getByConfirmedIsNull(){
+		return this.employerService.getByConfirmedIsNull();
+	}
+
 	@PostMapping("/add")
 	public Result add(@RequestBody Employer employer) {
 		return this.employerService.add(employer);
